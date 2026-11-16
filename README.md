@@ -1,1 +1,0 @@
-# Fundamentos-de-inteligencia-Artificial
