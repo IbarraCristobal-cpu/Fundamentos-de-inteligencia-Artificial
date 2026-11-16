@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TransitoBot · Examen teórico de conducción</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --asfalto: #1f2328;
+    --asfalto-2: #31373e;
+    --linea: #f4c20d;        /* amarillo de demarcación vial */
+    --senal: #0a5aa8;        /* azul de señal informativa */
+    --papel: #f2f3f4;
+    --superficie: #ffffff;
+    --borde: #d3d7db;
+    --texto: #1f2328;
+    --texto-suave: #5b636b;
+    --error: #b3261e;
+    --error-fondo: #fdecea;
+    --radio: 6px;
+    --fuente: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --fuente-titulo: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --papel: #16191d;
+      --superficie: #20252b;
+      --borde: #39414a;
+      --texto: #eceff2;
+      --texto-suave: #9aa3ac;
+      --senal: #5aa5ec;
+      --error: #ff8a80;
+      --error-fondo: #3a1f1d;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex; flex-direction: column;
+    background: var(--papel); color: var(--texto);
+    font: 400 17px/1.5 var(--fuente);
+  }
+
+  /* ---------- Encabezado con línea de demarcación ---------- */
+  header {
+    background: var(--asfalto); color: #fff;
+    padding: 18px 20px 20px;
+    position: relative;
+  }
+  header::after {            /* línea central discontinua: el elemento memorable */
+    content: ""; position: absolute; left: 0; right: 0; bottom: 6px; height: 4px;
+    background: repeating-linear-gradient(90deg, var(--linea) 0 36px, transparent 36px 60px);
+    background-size: 60px 4px;
+  }
+  body.cargando header::after { animation: avanzar 0.7s linear infinite; }
+  @keyframes avanzar { to { background-position-x: 60px; } }
+  .encabezado { max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: end; justify-content: space-between; }
+  h1 { font: 700 28px/1.1 var(--fuente-titulo); margin: 0; letter-spacing: 0.2px; }
+  .subtitulo { margin: 4px 0 0; color: #c3c9cf; font-size: 15px; }
+
+  .modos { display: inline-flex; border: 1px solid #55606a; border-radius: var(--radio); overflow: hidden; }
+  .modos input { position: absolute; opacity: 0; pointer-events: none; }
+  .modos label {
+    padding: 8px 16px; cursor: pointer; font: 600 15px var(--fuente-titulo); color: #dfe4e8;
+    border-right: 1px solid #55606a; user-select: none;
+  }
+  .modos label:last-of-type { border-right: 0; }
+  .modos input:checked + label { background: var(--linea); color: var(--asfalto); }
+  .modos input:focus-visible + label { outline: 3px solid #fff; outline-offset: -3px; }
+
+  /* ---------- Conversación ---------- */
+  main { flex: 1; overflow-y: auto; padding: 24px 20px 12px; }
+  .contenedor { max-width: 1080px; margin: 0 auto; }
+  .vacio h2 { font: 600 22px var(--fuente-titulo); margin: 12px 0 4px; }
+  .vacio p { margin: 0 0 14px; color: var(--texto-suave); max-width: 60ch; }
+  .ejemplos { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .ejemplos button {
+    font: 500 16px var(--fuente); text-align: left; cursor: pointer;
+    background: var(--superficie); color: var(--texto); border: 1px solid var(--borde);
+    border-radius: var(--radio); padding: 8px 12px;
+  }
+  .ejemplos button:hover { border-color: var(--senal); }
+
+  .turno { margin: 0 0 26px; }
+  .pregunta { font: 600 20px/1.3 var(--fuente-titulo); margin: 0 0 10px; max-width: 70ch; }
+  .respuestas { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  .respuestas.doble { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 760px) { .respuestas.doble { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--superficie); border: 1px solid var(--borde);
+    border-left-width: 6px; border-radius: var(--radio); padding: 12px 16px 10px;
+  }
+  .panel.prolog { border-left-color: var(--senal); }
+  .panel.llm { border-left-color: var(--linea); }
+  .panel h3 { font: 600 15px var(--fuente-titulo); margin: 0 0 6px; color: var(--texto-suave); }
+  .panel .cuerpo { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 68ch; }
+  .panel .meta { margin: 8px 0 0; font-size: 14px; color: var(--texto-suave); }
+  .panel.error { background: var(--error-fondo); border-color: var(--error); }
+  .panel.error .cuerpo { color: var(--error); }
+  .pendiente .cuerpo { color: var(--texto-suave); }
+
+  /* ---------- Escritura ---------- */
+  footer { background: var(--superficie); border-top: 1px solid var(--borde); padding: 12px 20px 16px; }
+  form { max-width: 1080px; margin: 0 auto; display: flex; gap: 10px; }
+  input[type=text] {
+    flex: 1; font: 400 17px var(--fuente); padding: 11px 14px; color: var(--texto);
+    background: var(--papel); border: 1px solid var(--borde); border-radius: var(--radio);
+  }
+  input[type=text]:focus-visible, button:focus-visible { outline: 3px solid var(--senal); outline-offset: 2px; }
+  .enviar {
+    font: 700 16px var(--fuente-titulo); padding: 0 22px; cursor: pointer;
+    background: var(--asfalto); color: #fff; border: 0; border-radius: var(--radio);
+  }
+  .enviar:disabled { opacity: 0.5; cursor: wait; }
+  .aviso { max-width: 1080px; margin: 8px auto 0; font-size: 14px; color: var(--texto-suave); min-height: 1.4em; }
+  .aviso.mal { color: var(--error); }
+  @media (prefers-reduced-motion: reduce) { body.cargando header::after { animation: none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="encabezado">
+    <div>
+      <h1>TransitoBot</h1>
+      <p class="subtitulo">Reglamento de tránsito para el examen teórico de conducción</p>
+    </div>
+    <div class="modos" role="radiogroup" aria-label="Chatbot que responde">
+      <input type="radio" name="modo" id="m-ambos" value="ambos" checked><label for="m-ambos">Comparar ambos</label>
+      <input type="radio" name="modo" id="m-prolog" value="prolog"><label for="m-prolog">Prolog</label>
+      <input type="radio" name="modo" id="m-llm" value="llm"><label for="m-llm">LLM</label>
+    </div>
+  </div>
+</header>
+
+<main id="conversacion" aria-live="polite">
+  <div class="contenedor" id="lista">
+    <section class="vacio" id="vacio">
+      <h2>Pregunta sobre límites, señales y preferencia en cruces</h2>
+      <p>Cada pregunta se responde con lógica de primer orden (Prolog), con un LLM, o con ambos a la vez para comparar.</p>
+      <div class="ejemplos" id="ejemplos"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <form id="formulario" autocomplete="off">
+    <input type="text" id="pregunta" maxlength="500" placeholder="Escribe tu pregunta…" aria-label="Pregunta" required>
+    <button class="enviar" id="enviar" type="submit">Preguntar</button>
+  </form>
+  <div class="aviso" id="aviso" role="status"></div>
+</footer>
+
+<script>
+(() => {
+  const EJEMPLOS = [
+    "¿Cuál es el límite de velocidad en zona urbana?",
+    "¿Comete infracción un camión a 95 km/h en zona rural?",
+    "¿Qué debe hacer un auto frente a un disco pare?",
+    "Un auto y una motocicleta llegan al mismo tiempo a un cruce sin señalizar y la motocicleta viene por la derecha. ¿Quién tiene preferencia?"
+  ];
+  const $ = (id) => document.getElementById(id);
+  const lista = $("lista"), vacio = $("vacio"), aviso = $("aviso"), campo = $("pregunta"), boton = $("enviar");
+  const historialLLM = [];   // mensajes previos que se reenvían al LLM
+
+  const modo = () => document.querySelector('input[name="modo"]:checked').value;
+  const el = (tag, clase, texto) => { const e = document.createElement(tag); if (clase) e.className = clase; if (texto !== undefined) e.textContent = texto; return e; };
+
+  EJEMPLOS.forEach((t) => {
+    const b = el("button", "", t); b.type = "button";
+    b.addEventListener("click", () => { campo.value = t; campo.focus(); });
+    $("ejemplos").appendChild(b);
+  });
+
+  function panel(tipo, titulo) {
+    const p = el("article", `panel ${tipo} pendiente`);
+    p.appendChild(el("h3", "", titulo));
+    p.appendChild(el("div", "cuerpo", "Consultando…"));
+    return p;
+  }
+
+  function rellenar(p, datos, tipo) {
+    p.classList.remove("pendiente");
+    const cuerpo = p.querySelector(".cuerpo");
+    if (!datos || !datos.ok) {
+      p.classList.add("error");
+      cuerpo.textContent = (datos && datos.error) || "No hubo respuesta.";
+      return;
+    }
+    cuerpo.textContent = datos.respuesta;
+    const detalle = tipo === "prolog" ? `Intención detectada: ${datos.intencion}` : `Modelo: ${datos.modelo}`;
+    p.appendChild(el("p", "meta", `${detalle} · ${datos.ms} ms`));
+  }
+
+  async function preguntar(texto) {
+    const m = modo();
+    vacio.hidden = true;
+    const turno = el("section", "turno");
+    turno.appendChild(el("p", "pregunta", texto));
+    const grilla = el("div", `respuestas${m === "ambos" ? " doble" : ""}`);
+    const pProlog = m !== "llm" ? panel("prolog", "Prolog · lógica de primer orden") : null;
+    const pLLM = m !== "prolog" ? panel("llm", "LLM · modelo de lenguaje") : null;
+    [pProlog, pLLM].filter(Boolean).forEach((p) => grilla.appendChild(p));
+    turno.appendChild(grilla);
+    lista.appendChild(turno);
+    turno.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    document.body.classList.add("cargando");
+    boton.disabled = true; aviso.textContent = ""; aviso.className = "aviso";
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pregunta: texto, modo: m, historial: historialLLM.slice(-6) })
+      });
+      const datos = await r.json();
+      if (!r.ok) throw new Error(datos.error || `Error ${r.status}`);
+      if (pProlog) rellenar(pProlog, datos.prolog, "prolog");
+      if (pLLM) {
+        rellenar(pLLM, datos.llm, "llm");
+        if (datos.llm && datos.llm.ok) {
+          historialLLM.push({ role: "user", content: texto }, { role: "assistant", content: datos.llm.respuesta });
+        }
+      }
+    } catch (e) {
+      [pProlog, pLLM].filter(Boolean).forEach((p) => rellenar(p, { ok: false, error: "No se pudo contactar al servidor." }));
+      aviso.textContent = e.message; aviso.className = "aviso mal";
+    } finally {
+      document.body.classList.remove("cargando");
+      boton.disabled = false; campo.focus();
+    }
+  }
+
+  $("formulario").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const t = campo.value.trim();
+    if (!t) return;
+    campo.value = "";
+    preguntar(t);
+  });
+
+  // Avisos de configuración (por ejemplo, LLM sin API key)
+  fetch("/api/estado").then((r) => r.json()).then((s) => {
+    const faltan = [];
+    if (!s.prolog.disponible) faltan.push("Prolog: " + s.prolog.motivo);
+    if (!s.llm.disponible) faltan.push("LLM: " + s.llm.motivo);
+    if (faltan.length) { aviso.textContent = faltan.join("  ·  "); aviso.className = "aviso mal"; }
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>
