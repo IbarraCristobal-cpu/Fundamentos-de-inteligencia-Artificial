@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "fecha": "2026-11-09T20:26:00"
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "categoria": "límite de velocidad",
+      "pregunta": "¿Cuál es el límite de velocidad en zona urbana?",
+      "esperada": "50 km/h para todo vehículo (Regla 2).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "En zona urbana el límite máximo es: 50 km/h para todo vehículo. (Regla 2)",
+        "ms": 32,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 2,
+      "categoria": "límite de velocidad",
+      "pregunta": "¿Qué velocidad máxima se permite en una zona escolar?",
+      "esperada": "30 km/h (en horario de entrada y salida de alumnos).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "En zona escolar el límite máximo es: 30 km/h para todo vehículo. (rige en los horarios de entrada y salida de los alumnos) (Regla 2)",
+        "ms": 33,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 3,
+      "categoria": "límite de velocidad",
+      "pregunta": "¿A qué velocidad máxima puede circular un camión en zona rural?",
+      "esperada": "90 km/h.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "En zona rural el límite máximo es: 90 km/h para camión. (camino con una pista por sentido) (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 4,
+      "categoria": "límite de velocidad",
+      "pregunta": "¿Cuál es el límite de velocidad de una motocicleta en zona rural?",
+      "esperada": "100 km/h.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "En zona rural el límite máximo es: 100 km/h para motocicleta. (camino con una pista por sentido) (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 5,
+      "categoria": "infracción por velocidad",
+      "pregunta": "Un auto circula a 70 km/h en zona urbana. ¿Comete infracción?",
+      "esperada": "Sí: excede el límite de 50 km/h en 20 km/h.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Comete infracción: un auto circulando en zona urbana a 70 km/h excede el límite de 50 km/h en 20 km/h. (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 6,
+      "categoria": "infracción por velocidad",
+      "pregunta": "¿Comete infracción un auto que va exactamente a 50 km/h en zona urbana?",
+      "esperada": "No: circular al límite no es infracción (v > l es estricto).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "No comete infracción: un auto circulando en zona urbana a 50 km/h está dentro del límite de 50 km/h. (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 7,
+      "categoria": "infracción por velocidad",
+      "pregunta": "Un camión va a 95 km/h en zona rural. ¿Está infringiendo la norma?",
+      "esperada": "Sí: el límite del camión es 90 km/h; excede en 5 km/h.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Comete infracción: un camión circulando en zona rural a 95 km/h excede el límite de 90 km/h en 5 km/h. (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 8,
+      "categoria": "infracción por velocidad",
+      "pregunta": "Una motocicleta circula a 35 km/h en zona escolar. ¿Es infracción?",
+      "esperada": "Sí: el límite es 30 km/h; excede en 5 km/h.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Comete infracción: una motocicleta circulando en zona escolar a 35 km/h excede el límite de 30 km/h en 5 km/h. (Regla 2)",
+        "ms": 33,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 9,
+      "categoria": "señales",
+      "pregunta": "¿Qué debe hacer un auto al llegar a un disco pare?",
+      "esperada": "Detenerse por completo (Regla 1).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Un auto ante la señal Disco Pare debe detenerse por completo y continuar solo cuando sea seguro. (Regla 1)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 10,
+      "categoria": "señales",
+      "pregunta": "Si un camión se encuentra frente a una luz roja, ¿qué debe hacer?",
+      "esperada": "Detenerse (Regla 1).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Un camión ante la señal Luz Roja debe detenerse por completo y continuar solo cuando sea seguro. (Regla 1)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 11,
+      "categoria": "señales",
+      "pregunta": "¿Qué debe hacer un auto frente a un ceda el paso?",
+      "esperada": "Ceder el paso a los vehículos de la vía preferente (Regla 4).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Un auto ante la señal Ceda el Paso debe ceder el paso a los vehículos que circulan por la vía preferente. (Regla 4)",
+        "ms": 36,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 12,
+      "categoria": "señales",
+      "pregunta": "¿Puede avanzar una motocicleta cuando el semáforo está en verde?",
+      "esperada": "Sí, con precaución y si el cruce está despejado (Regla 5).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Una motocicleta ante la señal Luz Verde puede avanzar, siempre con precaución y si el cruce está despejado. (Regla 5)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 13,
+      "categoria": "señales",
+      "pregunta": "¿Qué señales obligan al conductor a detenerse?",
+      "esperada": "Disco Pare y Luz Roja.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Obligan a detenerse por completo: Disco Pare, Luz Roja. (Regla 1)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 14,
+      "categoria": "preferencia en cruces",
+      "pregunta": "Un auto y una motocicleta llegan al mismo tiempo a un cruce sin señalizar y la motocicleta viene por la derecha. ¿Quién tiene preferencia?",
+      "esperada": "La motocicleta (Regla 3).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Tiene preferencia una motocicleta, porque se aproxima por la derecha de un auto al llegar ambos al mismo tiempo a un cruce sin señalizar. (Regla 3)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 15,
+      "categoria": "preferencia en cruces",
+      "pregunta": "En un cruce sin señalizar, si dos vehículos llegan al mismo tiempo, ¿quién pasa primero?",
+      "esperada": "El que se aproxima por la derecha del otro (Regla 3).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "En un cruce sin señalizar, si dos vehículos llegan al mismo tiempo, tiene preferencia el que se aproxima por la derecha del otro. (Regla 3) Dime qué vehículos son y cuál viene por la derecha.",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "correcta"
+      }
+    },
+    {
+      "id": 16,
+      "categoria": "parafraseo / jerga",
+      "pregunta": "Voy manejando mi camioneta por el centro de la ciudad a 60, ¿me pueden multar?",
+      "esperada": "Sí, 60 > 50 km/h en zona urbana (la camioneta no está modelada, pero el límite urbano aplica a todo vehículo).",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Comete infracción: un auto circulando en zona urbana a 60 km/h excede el límite de 50 km/h en 10 km/h. (Regla 2)",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "parcial",
+        "nota": "El veredicto coincide por azar: no reconoce «camioneta» y asume «auto» sin avisarlo (vehículo por defecto)."
+      }
+    },
+    {
+      "id": 17,
+      "categoria": "dos zonas en una pregunta",
+      "pregunta": "Un camión circula a 80 km/h por la ciudad y luego a 80 km/h por un camino rural. ¿En cuál de los dos tramos comete infracción?",
+      "esperada": "Solo en la ciudad (80 > 50). En zona rural el límite del camión es 90, por lo que 80 no es infracción.",
+      "tipo": "responder",
+      "prolog": {
+        "respuesta": "Comete infracción: un camión circulando en zona urbana a 80 km/h excede el límite de 50 km/h en 30 km/h. (Regla 2)",
+        "ms": 32,
+        "auto": "correcta",
+        "motivo": "contiene los datos esperados",
+        "final": "parcial",
+        "nota": "Solo evalúa la primera zona mencionada (urbana); ignora el tramo rural, que era la mitad de la pregunta."
+      }
+    },
+    {
+      "id": 18,
+      "categoria": "fuera de la base (tránsito)",
+      "pregunta": "¿Cuál es el límite de velocidad en una autopista de dos pistas por sentido?",
+      "esperada": "No está en la base de conocimiento (solo caminos rurales con una pista por sentido). Debe reconocerlo y no inventar.",
+      "tipo": "rechazar",
+      "prolog": {
+        "respuesta": "Límites máximos de velocidad (Regla 2):\n  - zona urbana: 50 km/h para todo vehículo\n  - zona rural: auto 100 km/h, camión 90 km/h, motocicleta 100 km/h\n  - zona escolar: 30 km/h para todo vehículo",
+        "ms": 31,
+        "auto": "incorrecta",
+        "motivo": "responde en vez de reconocer que no tiene ese conocimiento",
+        "final": "incorrecta",
+        "nota": "No detecta que la consulta (autopista, dos pistas) está fuera de su conocimiento; responde con la tabla general de límites, que podría confundir."
+      }
+    },
+    {
+      "id": 19,
+      "categoria": "fuera de la base (tránsito)",
+      "pregunta": "¿Cuánto es la multa por no respetar un disco pare?",
+      "esperada": "No está en la base de conocimiento (no se modelan multas). Debe reconocerlo y no inventar.",
+      "tipo": "rechazar",
+      "prolog": {
+        "respuesta": "Un vehículo ante la señal Disco Pare debe detenerse por completo y continuar solo cuando sea seguro. (Regla 1)",
+        "ms": 31,
+        "auto": "incorrecta",
+        "motivo": "responde en vez de reconocer que no tiene ese conocimiento",
+        "final": "incorrecta",
+        "nota": "Se guía por la palabra «disco pare» y responde la regla de detención; ignora que se preguntaba por la multa."
+      }
+    },
+    {
+      "id": 20,
+      "categoria": "fuera del dominio",
+      "pregunta": "¿Cuál es la capital de Francia?",
+      "esperada": "Fuera del dominio: debe rechazar la pregunta.",
+      "tipo": "rechazar",
+      "prolog": {
+        "respuesta": "No entendí tu pregunta. Puedo ayudarte con límites de velocidad, infracciones, señales (Disco Pare, Ceda el Paso, Luz Roja, Luz Verde) y preferencia en cruces. Escribe \"ayuda\" para ver ejemplos.",
+        "ms": 31,
+        "auto": "correcta",
+        "motivo": "reconoce que la consulta no está en su conocimiento",
+        "final": "correcta"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "prolog": {
+    "16": {"final": "parcial", "nota": "El veredicto coincide por azar: no reconoce «camioneta» y asume «auto» sin avisarlo (vehículo por defecto)."},
+    "17": {"final": "parcial", "nota": "Solo evalúa la primera zona mencionada (urbana); ignora el tramo rural, que era la mitad de la pregunta."},
+    "18": {"final": "incorrecta", "nota": "No detecta que la consulta (autopista, dos pistas) está fuera de su conocimiento; responde con la tabla general de límites, que podría confundir."},
+    "19": {"final": "incorrecta", "nota": "Se guía por la palabra «disco pare» y responde la regla de detención; ignora que se preguntaba por la multa."}
+  },
+  "llm": {}
+}
